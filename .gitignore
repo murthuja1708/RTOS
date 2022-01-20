@@ -1,0 +1,5 @@
+cdac/build/
+tasks/build
+delay_tasks/build/
+*/sdkconfig
+*/sdkconfig.old
