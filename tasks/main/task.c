@@ -2,7 +2,6 @@
 #include<freertos/FreeRTOS.h>
 #include<freertos/task.h>
 
-TaskHandle_t task1_handler,task2_handler;
 
 //static int flag1=0,flag2=0;
 
@@ -30,14 +29,14 @@ void Task2(void* parameters)
 void app_main()
 {
     BaseType_t result;
-    result=xTaskCreate(Task1,"task1",2048,"hello",1,&task1_handler);
-    if(result == pdPASS)
+    result=xTaskCreate(Task1,"task1",2048,"hello",12,NULL);
+    /*if(result == pdPASS)
     {
         printf("task1 is created\n");
     }
-    printf("creating task2\n");
+    printf("creating task2\n");*/
 
-    result=xTaskCreate(Task2,"task2",2048,"bye",2,&task2_handler); 
+    result=xTaskCreate(Task2,"task2",2048,"bye",11,NULL); 
     if(result == pdPASS)
     {
         printf("task2 is created\n");
