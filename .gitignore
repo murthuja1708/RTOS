@@ -1,5 +1,4 @@
-cdac/build/
-tasks/build
-delay_tasks/build/
+*/build/
 */sdkconfig
 */sdkconfig.old
+*/.vscode
