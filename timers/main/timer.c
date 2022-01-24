@@ -7,8 +7,6 @@
 #include "../../_uart.h"
 
 
-#define NUM_TIMERS 5
-
  /* An array to hold handles to the created timers. */
 TimerHandle_t xTimers;
 
