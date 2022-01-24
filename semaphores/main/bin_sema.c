@@ -53,13 +53,15 @@ void app_main()
 {
     //BaseType_t result;
 	
+	uart_init();
 	data_sema=xSemaphoreCreateBinary();
+
 	if(data_sema == NULL)
 	{
 		return;
 	}
+	xSemaphoreTake(data_sema,portMAX_DELAY);
 
-	uart_init();
     //result=
 	xTaskCreate(get_data,"data task",2048,NULL,3,NULL);
 
