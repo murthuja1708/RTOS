@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include<freertos/FreeRTOS.h>
 #include<freertos/task.h>
+#include "../../_uart.h"
 
-
-//static int flag1=0,flag2=0;
 
 void Task1(void* parameters)
 {   
     for(;;)
     {
-        printf("%s from Task1\n",(char*)parameters);
+		sendData("Task1","hello\r\n");
+        //printf("%s from Task1\n",(char*)parameters);
     }
     vTaskDelete(NULL);
 }
@@ -20,7 +20,8 @@ void Task2(void* parameters)
     
     for(;;)
     {
-        printf("%s from Task2\n",(char*)parameters);
+		sendData("Task2","bye\r\n");
+        //printf("%s from Task2\n",(char*)parameters);
     }
     vTaskDelete(NULL);
 }
@@ -29,6 +30,7 @@ void Task2(void* parameters)
 void app_main()
 {
     BaseType_t result;
+	uart_init();
     result=xTaskCreate(Task1,"task1",2048,"hello",12,NULL);
     /*if(result == pdPASS)
     {
