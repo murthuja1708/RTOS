@@ -7,6 +7,31 @@
 #include<string.h>
 #include<unistd.h>
 
+void get_ipaddress(const char* node,const char* port)
+{
+	int sfd,cfd,status,addr_len;
+	
+	struct addrinfo hints, *server_info, *p;
+	struct sockaddr_storage client_addr;
+	socklen_t sin_size;
+	char ip_addr[INET6_ADDRSTRLEN];
+	int rv;
+
+	memset(&hints,0,sizeof(hints));
+
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_sock_type = SOCK_STREAM;
+	hints.ai_flags = AI_PASSIVE;
+
+	// 
+	
+	if((rv = getaddrinfo(node,PORT,&hints,&servinfo))!=0)   
+	{
+		perror("getaddrinfo:");
+		return -1;
+	}
+}
+
 int main()
 {
 	int cfd,status;
