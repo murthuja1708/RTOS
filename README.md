@@ -1,3 +1,4 @@
+
 1) Find what is the task priority numbering for the RTOS you are using. eg. Higher the number higher the priority or vice-versa. Find the range of priority that can be assigned to a task for your RTOS.
 	*	Higher the number higher the priority(freertos).0 to 25.
 
@@ -6,6 +7,7 @@
     *   The above api's put the tasks into blocked state for given number of ticks.since no task is running cpu now schedules other tasks and we can delay this task also for given no of ticks making tasks periodic
 
 3)  Find the APIs in your RTOS that provides timestamp and use it to print the periodic task. Observe the jitter in the timestamp vs the periodicity. Enhance the code to 10 periodic tasks with different periodicity. Futher observe the jitter in each of the task.
+	*	xTaskGetTickCount() --> gets the current tick count and by multiplying this value with portTICK_PERIOD_MS gives time in msecs.
 	*	done with 3 periodic tasks
 
 4. Create two task with priority 10 and 20. Each task prints its own custom message.
@@ -13,7 +15,7 @@
 
 5. Swap the priority and observe the changes in the output. What is your conclusion on the sequence of printing the messages.
 
-	*	as soon as taks gets created task is moved to ready state and if there is no other task scheduler will schedule this task if there are tasks already then higher priority task will get scheduled.
+	*	as soon as taks gets created task is moved to ready state and if there is no other task scheduler will schedule this task if there are tasks already then higher priority task will get scheduled and the lower priority task will not get scheduled until the higher priority task gets blocked/suspended/deleted.
 
 6. What are the maximum number of tasks that can be created on the RTOS you are using? Is it limited by the RTOS design or underlying hardware resources or both.
 	*	There is no limit on number of tasks that can be created in freertos until we have the required size to do the task operations and other functionalities(i..e hardware resources).
@@ -54,8 +56,8 @@
 
 12. What are the APIs provided by your RTOS for enabling and disabling the interrupts? Write a program to demonstrate this capability?
 	these are esp32 driver api's
-	*	disabling interrupts --> gpio_intr_disable()
-	*	enabling interrupt  --> gpio_intr_enable()
+	*	disabling interrupts -->  	portDISABLE_INTERRUPTS();
+	*	enabling interrupts  -->     portENABLE_INTERRUPTS();
 
 13. Does your RTOS provide APIs to collect task statistics. If yes, list the statistics parameters that are collected and write a program to display the runtime task statistics?
 	*	vTaskGetRunTimeStats(char* buffer)
@@ -90,8 +92,8 @@
 		*	**path ---> Queues->main->assignment22.c**
 
 23. Write a RTOS application to manage resources using mutual exclusion
-	**todo**
-	
+	created two processes,in one process getting data from uart and in other processing that data and printing to uart.	Here data synchronization is achieved through mutual exclusion i..e before getting data i will take the mutex and in process data also i will take the mutex as get data is of highest priority it will run first and process data will not get mutex then i will get the data from uart and release the mutex then process data takes mutex and process the data and sent to uart
+
 24. Write a RTOS application to demonstrate a priority inversion problem. If your RTOS supports priority inheritance or priority ceiling, use it to solve the priority inversion problem.
 	**problem is done. solution yet to do.**
 
