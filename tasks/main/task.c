@@ -1,48 +1,47 @@
-#include <stdio.h>
+#include<stdio.h>
 #include<freertos/FreeRTOS.h>
 #include<freertos/task.h>
-#include "../../_uart.h"
 
 
 void Task1(void* parameters)
 {   
+	size_t i=0;
+
     for(;;)
     {
-		sendData("Task1","hello\r\n");
-        //printf("%s from Task1\n",(char*)parameters);
+		printf("%s from Task1\n",(char*)parameters);
+		fflush(stdout);
+		while(i<1000000)
+		{
+			i++;
+		}
+
     }
-    vTaskDelete(NULL);
 }
 
 
 void Task2(void* parameters)
 {
-    
+	size_t i=0;
+	char buffer[50];
     for(;;)
     {
-		sendData("Task2","bye\r\n");
-        //printf("%s from Task2\n",(char*)parameters);
+		printf("%s from Task2\n",(char*)parameters);
+		fflush(stdout);
+        vTaskGetRunTimeStats(buffer);
+        printf("%s\n",buffer);
+		while(i<1000000)
+		{
+			i++;
+		}
     }
-    vTaskDelete(NULL);
 }
 
 
 void app_main()
 {
-    BaseType_t result;
-	uart_init();
-    result=xTaskCreate(Task1,"task1",2048,"hello",12,NULL);
-    /*if(result == pdPASS)
-    {
-        printf("task1 is created\n");
-    }
-    printf("creating task2\n");*/
+    xTaskCreate(Task1,"task1",2048,(void*)"hello",4,NULL);
 
-    result=xTaskCreate(Task2,"task2",2048,"bye",11,NULL); 
-    if(result == pdPASS)
-    {
-        printf("task2 is created\n");
-    }
-
+    xTaskCreate(Task2,"task2",2048,(void*)"bye",3,NULL);
 
 }
