@@ -1,4 +1,9 @@
 
+-	![ESP32 DEVKITV1 PinOut](https://github.com/murthuja1708/RTOS/blob/main/ESP32-Pinout.jpg)
+
+
+
+
 1) Find what is the task priority numbering for the RTOS you are using. eg. Higher the number higher the priority or vice-versa. Find the range of priority that can be assigned to a task for your RTOS.
 	*	Higher the number higher the priority(freertos).0 to 25.
 
