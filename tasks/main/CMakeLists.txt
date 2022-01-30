@@ -1,1 +1,1 @@
-idf_component_register(SRCS "task.c" "../../_uart.c" INCLUDE_DIRS "")
+idf_component_register(SRCS "led_tasks.c" INCLUDE_DIRS "")
