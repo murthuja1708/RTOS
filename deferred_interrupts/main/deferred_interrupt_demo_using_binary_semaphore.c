@@ -32,6 +32,11 @@ void deferred_processing(void* args)
 		printf("took the semaphore\n");
 		gpio_val = !gpio_val;
 		gpio_set_level(LED_PIN,gpio_val);
+		vTaskDelay(pdMS_TO_TICKS(1000));
+		gpio_val = !gpio_val;
+		gpio_set_level(LED_PIN,gpio_val);
+		vTaskDelay(pdMS_TO_TICKS(1000));
+
 
 	}
 }
